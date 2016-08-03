@@ -15,6 +15,9 @@ import java.util.ArrayList;
  * otherwise, f(m) = {m}.
  * 5,100,101,6,7,8 -> f(1) = 5, f(2) = 5, 100, f(3) = 5,100,101 , f(4) = 5,6, f(7) = 5,6,7 , f(8) = 5,6,7,8 - here f(8) is largest and its the ans.
  * 5,100,101,6,4,3 -> f(1) = 5, f(2) = 5, 100, f(3) = 5,100,101, f(4) = 5,6, f(7) = 4 , f(8) = 3 - here f(3) is the largest and its the ans.
+ * Simpler version of this algo in Tushar Roy's utube vid..O(N^2) using one temporary array that tracks the count of lis at each element
+ * Another algo: O(NlogN) using binary search, uses two temporary arrays, one of which stores min. of last value of lis of particular length
+ * and second array stores the index value which the current index follows in the lis
  */
 public class LongestIncreasingSubsequence {
 

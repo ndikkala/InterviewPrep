@@ -1,7 +1,8 @@
 package algocode;
 import java.io.*;
 /*
- * Compute the minimum number of operations required to convert string a to string b. Minimum edit distance between two strings.
+ * Compute the minimum number of operations required to convert string a to string b. 
+ * Minimum edit distance between two strings.
  * 
  */
 

@@ -10,7 +10,10 @@ public class LongestPalindromicSubsequence {
 	int[][] dp = new int[3001][3001];
 
 	public static void main(String[] args) throws Exception {
-		
+		/*
+		 * Enter your code here. Read input from STDIN. Print output to STDOUT.
+		 * Your class should be named Solution.
+		 */
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String s = in.readLine();
 		LongestPalindromicSubsequence sol = new LongestPalindromicSubsequence();

@@ -5,9 +5,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+//import java.util.Map.Entry;
 
 /*
  * This method returns largest set of non-overlapping intervals from the given input. 
@@ -56,19 +56,17 @@ public class LargestNonOverlapping {
 		
 	}
 	
-	public void computelno(ArrayList<Integer> input, Map hm,ArrayList<int[]> output ) {
+	public void computelno(ArrayList<Integer> input, Map<Integer, Integer> hm,ArrayList<int[]> output ) {
 		this.input1 = input;
 		this.size = input.size();
 		doMergeSort(0, size - 1);
 		//System.out.println("Sorted input: " + input1);
-		int counter = 0;
 		for(int k=0; k<input1.size();k++){
 			int currentElement = input1.get(k);
 			//System.out.println(" Current element getting processed: "+ currentElement);
 			if(hm.containsKey(currentElement)){
 				//if current pt is a key, then its an end pt
 				//System.out.println(" Current element is an end pt ");
-				counter--;
 				int corrElement = Integer.parseInt(hm.get(currentElement).toString());
 				int [] interval = new int[2];
 				interval[0] = corrElement;
@@ -96,7 +94,7 @@ public class LargestNonOverlapping {
 			else if(hm.containsValue(currentElement)){
 				//if current pt is a value then its a start pt
 				//System.out.println(" Current element is a start pt ");
-				counter++;
+				//counter++;
 			}
 		}
 		

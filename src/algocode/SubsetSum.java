@@ -57,6 +57,21 @@ public class SubsetSum {
 					// case 1: if f(m-1,k) exists
 					if (dp[m - 1][k] != "0" && dp[m - 1][k] != null) {
 						dp[m][k] = dp[m - 1][k];
+						/*
+						 * This part is to get all subsets for that sum, if there is a sum possible with mth element,
+						 * replace current dp[m][k] that new subset with mth element, else use dp[m-1][k]
+						 */
+						int p = k - Integer.parseInt(inList.get(index));
+						if(p==0) {
+							// p=0, means mth element itself is k
+							dp[m][k] = inList.get(index);
+						}
+						
+						if (p > 0) {
+							// combine mth element with f(m-1,p) if f(m-1,p) exists
+							if(dp[m - 1][p]!="0")
+								dp[m][k] = dp[m - 1][p] + inList.get(index);
+						}
 					}
 
 					else {
@@ -94,6 +109,13 @@ public class SubsetSum {
 			System.out.print("\n");
 		}
 		*/
+		
+		//All rows under the sum column which are not 0, will be different subsets.
+		for(int i=1; i<=n; i++){
+			if(dp[i][sum]!= "0")
+				System.out.println("Subset "  
+						+ dp[i][sum]);
+		}
 
 		System.out.println("Subset that totals to sum " + sum + " is "
 				+ dp[n][sum]);

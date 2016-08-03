@@ -3,16 +3,16 @@ package algocode;
 import java.io.*;
 import java.util.*;
 /*
- * Given a list of cities and their neighbours as an adjacency matrix, find shortest paths between multiple cities.
+ * Given a list of cities and their neighbors as an adjacency matrix, find shortest paths between multiple cities.
  * Computation of multiple shortest paths is needed, like between A and F, between B and C, etc.
- * So we store the distances between every two nodes as we visit and compute in a distance matrix, where distance[row][col] represents
- * shortest cost of distance between city of index row and city of index col.
+ * So we store the distances between every two nodes as we visit and compute in a distance matrix, where distance[row][column] represents
+ * shortest cost of distance between city of index 'row' and city of index 'column'.
  * We have a boolean visited 1-d array for each city
- * We use a hashmap to store the city names as values with city index as the key.
- * Dijkstra's algo is used to find the paths. For each path asked, we check if the path distance is already udpated in distance matrix,
- * so that we dont compute it again. Else, we call the method and compute. 
- * We use graphnode class to represent a city's properties, which are index and tentative distance from another node, 
- * i.e., distance cell with row/col = that city's index
+ * We use a hash map to store the city names as values with city index as the key.
+ * Dijkstra's algorithm is used to find the paths. For each path asked, we check if the path distance is already updated in distance matrix,
+ * so that we don't compute it again. Else, we call the method and compute. 
+ * We use graph node class to represent a city's properties, which are index and tentative distance from another node, 
+ * i.e., distance cell with row/column = that city's index
  */
 public class ShortestPaths {
 	// There is only output for all test cases, so make it static
@@ -87,9 +87,9 @@ public class ShortestPaths {
 			for (int j = 0; j < num; j++) {
 				m[i][j] = 0;
 				if (i == j) {
-					distance[i][j] = 0;
+					distance[i][j] = 0;//same source and dest
 				} else {
-					distance[i][j] = 200005;
+					distance[i][j] = 200005; //distance not yet updated, so assign a high number
 				}
 			}
 		}
@@ -175,7 +175,7 @@ public class ShortestPaths {
 		return list;
 	}
 
-	class GraphNode implements Comparable<GraphNode> {
+	public class GraphNode implements Comparable<GraphNode> {
 		int tentDistance;
 
 		int indexOfNode;
