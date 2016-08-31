@@ -1,0 +1,57 @@
+class FindMissingNumbers{
+  
+  public static void main(String[] args){
+    
+    int[] test = {1,2,3,4,5,6,8,9,11,15,20};
+    
+    findMissingNumbers(test, 0, test.length-1);
+  }
+  
+  
+  public static void findMissingNumbers(int[] input, int low, int high){
+       int mid = ( low+high )/2;
+    if(low<high){
+    
+   
+      
+      //System.out.println("low "+low);
+     // System.out.println("high "+high);
+      //System.out.println("mid "+mid);
+      // System.out.println("mid ele "+input[mid]);
+      
+      /*
+      * Important: Did not put limit checks like mid-1>=low and mid-1<=high and she just put mid>0 as limit, and it printed numbers more than once. Putting these limit checks will make sure both sides of mid element are not evaulated and so, same side wont be evaluated more than once. Like for {1,2,3,4,5,6,8,9,11,15,20}, when 6 is evaluated 7 is missing right side and when 8 is evaluated 7 is missing on the left side. Here, 7 will get printed twice if limit checks are not done.
+      */
+      if(mid-1>=low && mid-1<=high && input[mid-1]+1<input[mid]){
+       
+        for(int i=input[mid-1]+1; i<input[mid];i++){
+          System.out.print(i +" ");
+        }
+         System.out.println();
+        findMissingNumbers(input, low, mid-1);
+      
+      }
+      
+      
+      if(mid+1>=low && mid+1<=high && input[mid]+1<input[mid+1]){
+        for(int i=input[mid]+1; i<input[mid+1];i++){
+          System.out.print(i +" ");
+        }
+         System.out.println();
+         findMissingNumbers(input, mid+1, high);
+      }
+     
+      
+     
+    }
+    
+    else{
+      return;
+    }
+      
+    
+          
+    
+  }
+  
+}
