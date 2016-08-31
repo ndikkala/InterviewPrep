@@ -1,0 +1,56 @@
+/*
+* Check if a string is pallindrome both iterative and recursive methods. O(n)
+*/
+
+class Pallindrome{
+  
+  public static void main(String[] args){
+    
+    String t1 = "malayalam";
+    if(checkPallindromeIterative(t1)){
+      System.out.println("Iter: String is pal");
+    }
+    
+    if(checkPallindromeRecursive(t1.toCharArray(), 0, t1.length()-1)){
+      System.out.println("Recur:String is pal");
+    }
+    
+  }
+  
+  public static boolean checkPallindromeIterative(String input){
+    
+    int start=0;
+    int end = input.length()-1;
+    char[] inputArray =  input.toCharArray();
+    
+    while(start<input.length() && end >-1){
+      
+      if(inputArray[start]!=inputArray[end]){
+        return false;
+      }
+      start++;
+      end--;
+      
+    }
+    
+    return true;
+    
+  }
+  
+  
+  public static boolean checkPallindromeRecursive(char[] input, int start, int end){
+    
+    if(start>=end){
+      return true;
+    }
+    
+    
+    if(input[start]==input[end] && checkPallindromeRecursive(input, start+1, end-1)){
+      return true;
+    }
+    
+    return false;
+    
+  }
+  
+}
