@@ -1,0 +1,49 @@
+class RootToLeafSumCheck{
+  
+  public static void main(String[] args){
+    Node root =  new Node(1);
+    Node firstLeft =  new Node(2);
+    Node firstRight =  new Node(3);
+    root.left= firstLeft;
+    root.right =  firstRight;
+    Node secondLeft =  new Node(4);
+    firstLeft.left = secondLeft;
+    Node secondRight =  new Node(3);
+    firstRight.right =  secondRight;
+    
+    int sum = 7;
+    
+    printRootToLeafSum(sum, 0, root);
+    
+  }
+  
+  public static boolean printRootToLeafSum(int sum, int currentSum, Node root){
+    
+    if(currentSum==sum && root==null){
+      return ; 
+    }
+    
+    if(printRootToLeafSum(sum, currentSum+root.data, root.left) || printRootToLeafSum(sum, currentSum+root.data, root.right) ){
+       System.out.print(root.data +" -");
+       return true;
+    }
+    return false;
+    
+  }
+  
+  static class Node{
+  
+  int data;
+  Node left;
+  Node right;
+  
+  Node(int data){
+    this.data =  data;
+    
+  }
+  
+}
+  
+}
+
+
