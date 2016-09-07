@@ -1,0 +1,84 @@
+import java.util.*;
+import java.io.*;
+import java.util.Map.Entry;
+/*
+* Given a list of menu items and their prices, and also a total
+* Find the combination of items that would amount exactly to that total, repetition of items is allowed.
+*
+*/
+
+/*
+* Test input
+* 5
+* Burger 5.65
+* Fries 2.85
+* Salad 6.97
+* Sandwich 7.45
+* Rolls 4.50
+* 15.80
+*/
+
+class MenuOrder{
+  static ArrayList<Integer> selectedItems = new ArrayList<Integer>();
+  static ArrayList<Integer> output = new ArrayList<Integer>();
+  
+  public static void main(String[] args) throws Exception{
+    
+    HashMap<Integer,String> menuList =  new  LinkedHashMap<Integer,String>();
+    
+    BufferedReader in =  new BufferedReader(new InputStreamReader(System.in));
+   
+    menuList.put(565, "Burger");
+    menuList.put(285, "Fries");
+    menuList.put(697, "Salad");
+    menuList.put(745, "Sandwich");
+    menuList.put(450, "Rolls");
+    int total = 1580;
+    
+    computeOrder(menuList, total);
+    
+    for(int o: output){
+        String item = menuList.get(o);
+        System.out.println(item);
+    }
+  }
+  
+  public static void computeOrder(HashMap<Integer,String> menu, int total){
+    int[] prices =  new int[menu.size()];
+    int i = 0;
+    for(Entry<Integer,String> entry : menu.entrySet()) {
+        int key = entry.getKey();
+        prices[i] = key;
+        i++;
+    }
+    ArrayList<Integer> selectedItems =  new  ArrayList<Integer>();
+    getOrderRecursive(prices, 0,  total);
+    
+  }
+  
+  public static void getOrderRecursive(int[] input, int sum){
+   //Base case
+    if(sum==0){
+      //If current sum is 0, elements added so far form the order, so put them in the output 
+      output = new ArrayList<Integer>();
+      for(int each: selectedItems){
+        output.add(each);
+      }
+      return;
+    }
+    
+    for(int j=0; j<input.length; j++){
+      if(input[j]<=sum){
+     //If current element is less than current sum, then it can possibly contribute to the order, so subtract it and add it      //to temp list of selected items.
+      sum -= input[j];
+      selectedItems.add(input[j]);
+      getOrderRecursive(input, sum);
+      //Irrespective of whether an element contributed to the order or not, after recursive call is finished, we tried all       possible sums with current element, try the next element and also remove the current element and add it back to sum. 
+      selectedItems.remove(new Integer(input[j]));
+      sum += input[j];
+      }
+    }
+    return;
+  }
+  
+}
