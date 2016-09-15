@@ -1,0 +1,115 @@
+import java.util.*;
+import java.io.*;
+
+/*
+* Longest substring with exactly M distinct chars, given a string and M
+* "aabbcc", k = 1
+Max substring can be any one from {"aa" , "bb" , "cc"}.
+
+"aabbcc", k = 2
+Max substring can be any one from {"aabb" , "bbcc"}.
+
+"aabbcc", k = 3
+There are substrings with exactly 3 unique characters
+{"aabbcc" , "abbcc" , "aabbc" , "abbc" }
+Max is "aabbcc" with length 6.
+
+"aaabbb", k = 3
+There are only two unique characters, thus show error message. 
+
+*/
+
+class Solution{
+  
+  public static void main(String [] args){
+     
+    String test1 = "aabbcc";
+    int m1 = 1;
+  
+    int m2 = 2;
+    
+    String test3 = "aaabbb";
+    int m3 = 3;
+    
+     System.out.println(longestSubStringWithMDistinctChars(test1, m1));
+     System.out.println(longestSubStringWithMDistinctChars(test1, m2));
+     System.out.println(longestSubStringWithMDistinctChars(test3, m3));
+     System.out.println(longestSubStringWithMDistinctChars("namratha", 3));
+    
+  }
+  
+  public static String longestSubStringWithMDistinctChars(String input, int m){
+    String output = "";
+    String maxOutput = "";
+    
+    char[] allChars =  input.toCharArray();
+    int countUnique = 0;
+    int[] countChar = new int[26];
+    
+    
+    for(char c: allChars){
+      if(output.length()>=maxOutput.length() && countUnique==m){
+          maxOutput = output;
+      }
+      //System.out.println("maxOut " + maxOutput);
+      //System.out.println(" char " + c);
+      if(countUnique < m){
+       //System.out.println(" uniq less " + countUnique + " out "+output);
+       output += c;
+        if(countChar[c-97]==0){
+          countUnique++;
+        }
+        countChar[c-97]++;
+      }
+      else if(countUnique>m){
+        //distinct char is more than M, remove chars from left and add the current char to the rightmost
+        //System.out.println(" uniq more " + countUnique + " out "+output);
+        while(countUnique>m){
+          char remove =  output.charAt(0);
+          output =  output.substring(1);
+          countChar[remove-97]--;
+          if(countChar[remove-97]==0){
+            countUnique --;
+          }
+        }
+        output += c;
+        if(countChar[c-97]==0){
+          countUnique++;
+        }
+        countChar[c-97]++;
+        
+      }
+      else{
+        //count is exactly M
+         //System.out.println(" uniq equal " + countUnique + " out "+output);
+         if(countChar[c-97]==0){
+            char remove =  output.charAt(0);
+            //System.out.println("output before "+ output);
+            output =  output.substring(1);
+            countChar[remove-97]--;
+            if(countChar[remove-97]==0){
+              countUnique --;
+            }
+         }
+         
+         output += c;
+         if(countChar[c-97]==0){
+           countUnique++;
+         }
+         countChar[c-97]++;
+     
+         
+        
+      }
+      
+      
+    }
+    
+    if(maxOutput.length()==0){
+      maxOutput = "ERROR";
+    }
+    return maxOutput;
+    
+  }
+  
+}
