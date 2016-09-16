@@ -1,0 +1,61 @@
+import java.util.*;
+
+class Solution{
+  static Node root;
+  
+  public static void main(String [] args){
+    
+    Solution s =  new Solution();
+    root = s.new Node(5);
+    root.left = s.new Node(3);
+    root.right = s.new Node(7);
+    root.left.left = s.new Node(2);
+    root.left.right = s.new Node(4);
+    root.right.left = s.new Node(6);
+    root.right.right = s.new Node(8);
+    int k = 3;
+    
+    System.out.println(kthSmallest(root, k));
+  }
+  
+  
+
+  public static int kthSmallest(Node root, int k) {
+    Stack<Node> stack = new Stack<Node>();
+ 
+    Node p = root;
+    int result = 0;
+ 
+    while(!stack.isEmpty() || p!=null){
+        if(p!=null){
+            stack.push(p);
+            p = p.left;
+        }else{
+            Node t = stack.pop();
+            k--;
+            if(k==0)
+            {
+                result = t.data;
+               return result;
+            }
+            p = t.right;
+        }
+    }
+ 
+    return result;
+}
+  
+  class Node{
+    int data;
+    Node left;
+    Node right;
+    
+    Node(int data){
+      this.data =  data;
+      this.left =  null;
+      this.right = null;
+    }
+    
+  }
+  
+}
