@@ -1,0 +1,87 @@
+import java.io.*;
+import java.util.*;
+
+/*
+ *  Returns one path which has the maximum sum
+ */
+
+class Solution {
+  private Node root;
+  public static void main(String[] args) {
+    Solution s =  new Solution();
+    s.root =  s.new Node(6);
+    s.root.left =  s.new Node(2);
+    s.root.left.left = s.new Node(3);
+    s.root.left.right =  s.new Node(4);
+    s.root.right = s.new Node(7);
+    s.root.right.left = s.new Node(8);
+    s.root.right.right =  s.new Node(1);
+    
+    Path result = s.findPath(s.root);
+    for(Node n: result.elements){
+      System.out.println(n.data);
+    }
+    
+  }
+  
+  
+  
+ public Path findPath(Node root){
+  if(root==null){
+    return null;
+  }
+
+  Path left = findPath(root.left);
+  Path right =  findPath(root.right);
+  
+  if(left==null && right==null){
+     return new Path(root);
+  }
+  
+  if(left.currentSum>right.currentSum){
+      left.add(root);
+      return left;
+  }
+  else if(left.currentSum<right.currentSum){
+      right.add(root);
+      return right;
+  }
+  else{
+      //equal sum
+      left.add(root);
+      return left;
+  }
+ 
+  
+
+}
+  
+  class Path{
+    ArrayList<Node> elements;
+    int currentSum;
+    
+    Path(Node element){
+      elements =  new ArrayList<Node>();
+      elements.add(element);
+      currentSum = element.data;
+      
+    }
+    
+    void add(Node element){
+       this.elements.add(element);
+       this.currentSum += element.data;
+    }
+    
+  }
+
+  class Node{
+    int data;
+    Node left;
+    Node right;
+    
+    Node(int data){
+      this.data =  data;
+    }
+  }
+  
+}
